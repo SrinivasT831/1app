@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fraud Detection Tool</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Google Fonts: Using Poppins for a modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <h2>Fraud Detection System</h2>
+  
+  <!-- Top Buttons including Dark Mode and About -->
+  <div class="top-buttons">
+    <button id="darkModeToggle"><i class="fas fa-adjust"></i> Toggle Dark Mode</button>
+    <button id="aboutButton"><i class="fas fa-info-circle"></i> About</button>
+  </div>
+
+  <form id="fraudForm">
+    <!-- Binary Selections using Radio Buttons -->
+    <div>
+      <label>Metadata Mismatch:</label>
+      <label class="radio-container">Yes
+        <input type="radio" name="metadata" value="1" required>
+        <span class="checkmark"></span>
+      </label>
+      <label class="radio-container">No
+        <input type="radio" name="metadata" value="0" required>
+        <span class="checkmark"></span>
+      </label>
+    </div>
+
+    <div>
+      <label>Location Anomaly:</label>
+      <label class="radio-container">Yes
+        <input type="radio" name="location" value="1" required>
+        <span class="checkmark"></span>
+      </label>
+      <label class="radio-container">No
+        <input type="radio" name="location" value="0" required>
+        <span class="checkmark"></span>
+      </label>
+    </div>
+
+    <div>
+      <label>Number of OTP Requests:</label>
+      <input type="number" id="otpFreq" min="0" required />
+    </div>
+
+    <div>
+      <label>Typing Speed Observed:</label>
+      <input type="number" id="typingObs" min="0" required />
+    </div>
+
+    <div>
+      <label>Typing Speed Expected:</label>
+      <input type="number" id="typingExp" min="1" required />
+    </div>
+
+    <div>
+      <label>Gesture Behavior Anomaly:</label>
+      <label class="radio-container">Yes
+        <input type="radio" name="gestureObs" value="1" required>
+        <span class="checkmark"></span>
+      </label>
+      <label class="radio-container">No
+        <input type="radio" name="gestureObs" value="0" required>
+        <span class="checkmark"></span>
+      </label>
+    </div>
+
+    <div>
+      <label>Sensitive Action Attempted:</label>
+      <label class="radio-container">Yes
+        <input type="radio" name="sensitiveAction" value="1" required>
+        <span class="checkmark"></span>
+      </label>
+      <label class="radio-container">No
+        <input type="radio" name="sensitiveAction" value="0" required>
+        <span class="checkmark"></span>
+      </label>
+    </div>
+
+    <div>
+      <label>Insecure Network:</label>
+      <label class="radio-container">Yes
+        <input type="radio" name="insecureNetwork" value="1" required>
+        <span class="checkmark"></span>
+      </label>
+      <label class="radio-container">No
+        <input type="radio" name="insecureNetwork" value="0" required>
+        <span class="checkmark"></span>
+      </label>
+    </div>
+
+    <div>
+      <label>Fraud Database Flagged:</label>
+      <label class="radio-container">Yes
+        <input type="radio" name="fraudDB" value="1" required>
+        <span class="checkmark"></span>
+      </label>
+      <label class="radio-container">No
+        <input type="radio" name="fraudDB" value="0" required>
+        <span class="checkmark"></span>
+      </label>
+    </div>
+
+    <div>
+      <label>Multiple Accounts:</label>
+      <label class="radio-container">Yes
+        <input type="radio" name="multipleAccounts" value="1" required>
+        <span class="checkmark"></span>
+      </label>
+      <label class="radio-container">No
+        <input type="radio" name="multipleAccounts" value="0" required>
+        <span class="checkmark"></span>
+      </label>
+    </div>
+
+    <button type="submit">Check Fraud Risk</button>
+  </form>
+
+  <!-- Modal for Final Result and Risk Meter -->
+  <div id="resultModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Fraud Risk Analysis</h3>
+      <div id="riskMeterContainer">
+        <label>Fraud Risk Level:</label>
+        <div id="riskMeter">
+          <div id="riskFill"></div>
+        </div>
+      </div>
+      <div id="finalResult"></div>
+    </div>
+  </div>
+  
+  <!-- Modal for About Information -->
+  <div id="aboutModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="aboutClose">&times;</span>
+      <h3>About This App</h3>
+      <p>
+        This fraud detection tool calculates a risk score based on several behavioral inputs.
+        It provides real-time insights into potential fraudulent activities by assessing various risk factors.
+      </p>
+      <p><em>Developed by Srinivas T and team</em></p>
+    </div>
+  </div>
+
+  <!-- Sound Alerts (Make sure these MP3 files are in your project folder) -->
+  <audio id="fraudAlertSound" src="fraud_alert.mp3"></audio>
+  <audio id="mediumRiskSound" src="medium_risk.mp3"></audio>
+  <audio id="lowRiskSound" src="low_risk.mp3"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
