@@ -6,6 +6,11 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default_secret_here')
 CORS(app)
 
+# New root route to avoid a 404 on GET /
+@app.route("/")
+def home():
+    return "Welcome to the Fraud Detection API!"
+
 @app.route('/detect_fraud', methods=['POST'])
 def detect_fraud():
     data = request.json
